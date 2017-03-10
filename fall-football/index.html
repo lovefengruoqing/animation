@@ -1,0 +1,60 @@
+<!--
+/**
+ * @Author:      Zechin Wu
+ * @DateTime:    2016-12-30 13:35:19
+ * @Description: 世界杯球场
+ */
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="description" content="纯爱枫若情的博客" />
+    <meta name="description" content="纯爱枫若情的demo小站，纯爱枫若情的个人博客，纯爱枫若情的个人网站" />
+    <meta name="keywords" content="纯爱枫若情, 个人博客, Github, web前端,JavaScript,css,html" />
+    <meta name="author" content="纯爱枫若情,fengruoqing" />
+    <title>足球下落动画</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+    <h1>足球下落动画</h1>
+    <div id="pitch" class="football-pitch">
+        <div class="lines">
+            <div class="halfway-line"></div>
+            <div class="center-circle"></div>
+            <div class="center-spot"></div>
+            <div class="penalty-arc-container-left">
+                <div class="penalty-arc"></div>
+            </div>
+            <div class="penalty-area-left"></div>
+            <div class="penalty-spot-left"></div>
+            <div class="goal-area-left"></div>
+            <div class="corner-area-left-top"></div>
+            <div class="corner-area-left-bottom"></div>
+            <div class="penalty-arc-container-right">
+                <div class="penalty-arc"></div>
+            </div>
+            <div class="penalty-area-right"></div>
+            <div class="penalty-spot-right"></div>
+            <div class="goal-area-right"></div>
+            <div class="corner-area-right-top"></div>
+            <div class="corner-area-right-bottom"></div>
+        </div>
+        <div class="football-container">
+        		<div id="ball" class="ball"></div>
+            <canvas id="football" width="1000" height="500" style="display: none;"></canvas>
+        </div>
+    </div>
+
+    <script type="text/javascript" src='js/football.js'></script>
+    <script type="text/javascript">
+    window.onload = function() {
+        document.getElementById("pitch").className = 'football-pitch ready';
+        football.play();
+    };
+    </script>
+</body>
+
+</html>
