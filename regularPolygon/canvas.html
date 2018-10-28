@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <canvas width=500 height=500 id="myCanvas"></canvas>
+  <script type="text/javascript">
+    var canvas = document.querySelector("#myCanvas");
+    var ctx = canvas.getContext("2d");
+    var n = 3;
+    var angle = 0;
+    polygon(ctx, n, 250, 250, 50+angle/2, angle*(2*Math.PI)/360, false, 2);
+    function doAnimation() {
+      // 清楚canvas画布的两种方式
+      ctx.clearRect(0,0, canvas.width, canvas.height);
+      // canvas.height = canvas.height;
+      
+      angle += 1;
+      if(angle>=360){
+        n++;
+        angle = 0;
+      }
+      if(n>100) n=3;
+      polygon(ctx, n, 250, 250, 50 + ((angle/2)>=90?(180-(angle/2)):(angle/2)), angle*(2*Math.PI)/360, false, 2);
+      requestAnimationFrame(doAnimation);
+    }
+
+    doAnimation();
+
+
+    function polygon(g, n, x, y, r, angle, counterclockwise, border) {
+        angle = angle || 0;
+        counterclockwise = counterclockwise || false;
+        g.lineWidth = border;
+        g.beginPath();
+        g.moveTo(x,y);
+        var firstPoint = {x: x + r * Math.sin(angle), y:  y - r * Math.cos(angle)};
+        g.lineTo(firstPoint.x, firstPoint.y); //使用三角法计算位置
+        var delta = 2 * Math.PI / n; //两个顶点之间的夹角
+        for (var i = 1; i < n; i++) { //循环剩余的每个顶点
+          angle += counterclockwise ? -delta : delta; //调整角度
+          g.lineTo(x + r * Math.sin(angle), y - r * Math.cos(angle));
+        }
+        g.lineTo(firstPoint.x, firstPoint.y);
+        // g.closePath(); //将最后一个顶点和起点连接起来
+        g.stroke();
+
+        g.beginPath();
+        g.arc(x,y, 24, 0, 2*Math.PI);
+        g.fillStyle = "red";
+        g.fill();
+
+        g.beginPath();
+        g.font = "30px Verdana";
+        g.fillStyle = "#ffffff";
+        g.textBaseline = "middle";
+        g.textAlign = "center";
+        g.fillText(n,x,y);
+        g.fill();
+      }
+  </script>
+</body>
+</html>
